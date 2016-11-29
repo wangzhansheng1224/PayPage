@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) GalneProgressView *progressView;
 
+@property (nonatomic, copy) void (^destroy) (void);                   /** 页面结束时销毁 */
+
 /** 快速创建 */
 + (instancetype)tradeView;
 
@@ -32,9 +34,5 @@
 -(void)showProgressView:(NSString *)infoStr;
 
 -(void)showSuccess:(NSString *)infoStr;
-
--(void)hiddenPayPasswordView;
-
-
 
 @end

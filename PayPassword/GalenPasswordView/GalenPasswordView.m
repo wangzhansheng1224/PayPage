@@ -49,7 +49,7 @@
 {
     [self.nums removeLastObject];
     
-    //    NSLog(@"delete nums %@ ",self.nums);
+//    NSLog(@"delete nums %@ ",self.nums);
     
     [self setNeedsDisplay];
 }
@@ -61,12 +61,10 @@
     NSString *numObj = userInfo[GalenKeyboardNumberKey];
     if (numObj.length >= GalenInputViewNumCount) return;
     [self.nums addObject:numObj];
-    //    NSLog(@"数字 nums %@ ",self.nums);
+//    NSLog(@"数字 nums %@ ",self.nums);
     [self setNeedsDisplay];
     
 }
-
-
 
 /** 注册keyboard通知 */
 - (void)setupKeyboardNote
@@ -80,11 +78,7 @@
 - (void)drawRect:(CGRect)rect
 {
     // 画图
-    // UIImage *bg = [UIImage imageNamed:@"trade.bundle/pssword_bg"];
     UIImage *field = [UIImage imageNamed:@"trade.bundle/password_in"];
-    
-    //[bg drawInRect:rect];
-    
     CGFloat x = 20;
     CGFloat y = 30;
     CGFloat w = CGRectGetWidth(self.frame)-40;
@@ -92,7 +86,6 @@
     [field drawInRect:CGRectMake(x, y, w, h)];
     
     // 画点
-    
     CGFloat fieldWidth=w/6;
     UIImage *pointImage = [UIImage imageNamed:@"trade.bundle/yuan"];
     CGFloat pointW = CGRectGetWidth(self.frame) * 0.04;
@@ -110,9 +103,6 @@
     }
     
 }
-
-
-
 
 - (void)dealloc
 {

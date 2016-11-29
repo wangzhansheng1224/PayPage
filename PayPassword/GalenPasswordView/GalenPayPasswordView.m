@@ -19,6 +19,7 @@
 @property ( nonatomic ,strong ) UILabel             *titleLabel;          /** 标题 */
 @property ( nonatomic ,strong ) GalenPasswordView   *inPutView;           /** 输入密码 */
 @property ( nonatomic, strong ) UITextField         *responsder;          /** 响应者 */
+@property ( nonatomic, strong ) NSString            *tempStr;             /** 输入的密码 */
 
 
 
@@ -27,6 +28,12 @@
 
 
 @implementation GalenPayPasswordView
+
+/** 快速创建 */
++ (instancetype)tradeView
+{
+    return [[self alloc] init];
+}
 
 -(id)initWithFrame:(CGRect)frame
 {
@@ -61,15 +68,14 @@
 
 -(void)setupInputView
 {
+    //取消按钮
     self.cancelBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-
     [self.cancelBtn setImage:[UIImage imageNamed:@"trade.bundle/back_arrow_orange"] forState:UIControlStateNormal];
-    
     [self.cancelBtn addTarget:self action:@selector(cancelClickTouchup) forControlEvents:UIControlEventTouchUpInside];
     [self.cancelBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-    
     [self.coverView addSubview:self.cancelBtn];
     
+    //标题
     self.titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(55, 0, CGRectGetWidth(self.frame)-110, 40)];
     self.titleLabel.textAlignment=NSTextAlignmentCenter;
     self.titleLabel.font=[UIFont systemFontOfSize:16];
@@ -77,17 +83,18 @@
     [self.coverView addSubview:self.titleLabel];
     self.titleLabel.text=@"请输入支付密码";
     
+    //标题下方横线
     UIView *lineView=[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.titleLabel.frame), CGRectGetWidth(self.frame), 1)];
     lineView.backgroundColor=[UIColor lightGrayColor];
     lineView.alpha=0.3;
     [self.coverView addSubview:lineView];
     
-    
+    //输入框视图
     GalenPasswordView *input=[[GalenPasswordView alloc]initWithFrame:CGRectMake(0, 41, CGRectGetWidth(self.frame), 80)];
-    
     [self.coverView addSubview:input];
     self.inPutView = input;
     
+    //完成视图
     self.progressView = [[GalneProgressView alloc] init];
     self.progressView.center=CGPointMake(CGRectGetWidth(self.coverView.frame)/2,120);
     self.progressView.hidden=YES;
@@ -100,11 +107,9 @@
 -(void)cancelClickTouchup
 {
     [self hidenKeyboard:^(BOOL finished) {
-        
-        [self.inPutView setNeedsDisplay];
-          [self hidenKeyboard:nil];
-        [self removeFromSuperview];
-      
+        if (self.destroy) {
+            self.destroy();
+        }
         
     }];
 }
@@ -130,49 +135,45 @@
     [self.coverView addSubview:noPWD];
     [noPWD setTitle:@"忘记密码" forState:UIControlStateNormal];
     self.lessPwdBtn=noPWD;
-//    self.lessPwdBtn.tag=ZCTradeInputViewButtonTypeWithNoPwd;
     
     [self.lessPwdBtn addTarget:self action:@selector(lessBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
-#pragma  mark  ************************ 选择无密码支付 **************************
+#pragma mark -- 忘记密码点击事件
 
 -(void)lessBtnClick:(UIButton *)btn
 {
- if (self.lessPassword)
- {
-     self.lessPassword();
-     
- }
-    
+    if (self.lessPassword)
+    {
+        self.lessPassword();
+    }
 }
 
 /**
  *  处理字符串 和 删除键
  */
-static NSString *tempStr;
+#pragma mark -- 键盘你被点击的回调
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     
-    if (!tempStr) {
-        tempStr = string;
+    if (!_tempStr) {
+        _tempStr = string;
     }else{
-        tempStr = [NSString stringWithFormat:@"%@%@",tempStr,string];
+        _tempStr = [NSString stringWithFormat:@"%@%@",_tempStr,string];
     }
     
     if ([string isEqualToString:@""]) {
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:GalenKeyboardDeleteButtonClick object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:GalenKeyboardDeleteButtonClick object:nil];
         
-        if (tempStr.length > 0) {   //  删除最后一个字符串
-            NSString *cccc = [tempStr substringToIndex:[tempStr length] - 1];
-            tempStr = cccc;
-        }
+//        if (_tempStr.length > 0) {   //  删除最后一个字符串
+            _tempStr = [_tempStr substringToIndex:[_tempStr length] - 1];
+//        }
         
-        //         NSLog(@" 点击了删除键 ---%@",tempStr);
+       NSLog(@" 点击了删除键 ---%@",_tempStr);
     }else{
         
-        if (tempStr.length == 6) {
+        if (_tempStr.length == 6) {
             
             //
             [self intputFinish];
@@ -183,7 +184,7 @@ static NSString *tempStr;
         
         NSMutableDictionary *userInfoDict = [NSMutableDictionary dictionary];
         userInfoDict[GalenKeyboardNumberKey] = string;
-        [[NSNotificationCenter defaultCenter] postNotificationName:GalenKeyboardNumberButtonClick object:self userInfo:userInfoDict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:GalenKeyboardNumberButtonClick object:nil userInfo:userInfoDict];
     }
     return YES;
 }
@@ -192,11 +193,7 @@ static NSString *tempStr;
 -(void)intputFinish
 {
     if (self.finish) {
-        
-        self.finish(tempStr);
-        tempStr = nil;
-  
-        self.lessPwdBtn.hidden=YES;
+        self.finish(_tempStr);
     }
     
     
@@ -207,18 +204,17 @@ static NSString *tempStr;
 
     [self.progressView showSuccess:infoStr];
     
-    
 }
 
 -(void)showProgressView:(NSString *)infoStr
 {
-    
-    
     [UIView animateWithDuration:0.4 animations:^{
         
         self.inPutView.hidden=YES;
         self.progressView.hidden=NO;
+        self.cancelBtn.hidden=YES;
         [self.responsder endEditing:NO];
+        self.lessPwdBtn.hidden=YES;
         
     } completion:^(BOOL finished) {
         
@@ -234,30 +230,9 @@ static NSString *tempStr;
     
 }
 
--(void)hiddenPayPasswordView
-{
-//    [self hidenKeyboard:nil];
-//    [self removeFromSuperview];
-//   [self cancelClickTouchup];
-    [self performSelectorOnMainThread:@selector(cancelClickTouchup) withObject:self waitUntilDone:NO];
-    
-    
-}
-
-
-
-
-/** 快速创建 */
-+ (instancetype)tradeView
-{
-    return [[self alloc] init];
-}
-
-
 -(void)showInView:(UIView *)view
 {
     GalenPayPasswordView *payView=self;
-    
     // 浮现
     [view addSubview:payView];
     /** 弹出键盘 */
@@ -275,15 +250,9 @@ static NSString *tempStr;
         
         self.coverView.transform = CGAffineTransformMakeTranslation(0,-GalenCoverViewHeight);
         self.alpha++;
-        
         [self.responsder becomeFirstResponder];
         
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    
-    
+    } completion:nil];
     
 }
 
@@ -295,7 +264,7 @@ static NSString *tempStr;
     
     [UIView animateWithDuration:0.4 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
-        self.coverView.transform = CGAffineTransformMakeTranslation(0,0);
+        self.coverView.transform = CGAffineTransformMakeTranslation(0,GalenCoverViewHeight);
         self.alpha--;
         [self.responsder endEditing:NO];
         
