@@ -70,7 +70,7 @@
 {
     //取消按钮
     self.cancelBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 40)];
-    [self.cancelBtn setImage:[UIImage imageNamed:@"trade.bundle/back_arrow_orange"] forState:UIControlStateNormal];
+    [self.cancelBtn setImage:[UIImage imageNamed:@"trade.bundle/zhifu-close"] forState:UIControlStateNormal];
     [self.cancelBtn addTarget:self action:@selector(cancelClickTouchup) forControlEvents:UIControlEventTouchUpInside];
     [self.cancelBtn setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
     [self.coverView addSubview:self.cancelBtn];
@@ -78,7 +78,7 @@
     //标题
     self.titleLabel=[[UILabel alloc]initWithFrame:CGRectMake(55, 0, CGRectGetWidth(self.frame)-110, 40)];
     self.titleLabel.textAlignment=NSTextAlignmentCenter;
-    self.titleLabel.font=[UIFont systemFontOfSize:16];
+    self.titleLabel.font=[UIFont systemFontOfSize:18];
     self.titleLabel.textColor=[UIColor darkGrayColor];
     [self.coverView addSubview:self.titleLabel];
     self.titleLabel.text=@"请输入支付密码";
@@ -119,7 +119,6 @@
     UITextField *responsder = [[UITextField alloc] init];
     responsder.delegate = self;
     responsder.keyboardType = UIKeyboardTypeNumberPad;
-    
     [self addSubview:responsder];
     self.responsder = responsder;
 }
@@ -128,20 +127,17 @@
 {
     UIButton *noPWD=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.inPutView.frame)-90, CGRectGetMaxY(self.inPutView.frame)+15, 70, 40)];
     noPWD.titleLabel.font=[UIFont systemFontOfSize:14];
-    
-    [noPWD setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
-    
-    
+    noPWD.alpha=0.8;
+    [noPWD setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [noPWD setTitle:@"忘记密码?" forState:UIControlStateNormal];
     [self.coverView addSubview:noPWD];
-    [noPWD setTitle:@"忘记密码" forState:UIControlStateNormal];
-    self.lessPwdBtn=noPWD;
     
+    self.lessPwdBtn=noPWD;
     [self.lessPwdBtn addTarget:self action:@selector(lessBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
 #pragma mark -- 忘记密码点击事件
-
 -(void)lessBtnClick:(UIButton *)btn
 {
     if (self.lessPassword)
@@ -166,25 +162,20 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:GalenKeyboardDeleteButtonClick object:nil];
         
-//        if (_tempStr.length > 0) {   //  删除最后一个字符串
-            _tempStr = [_tempStr substringToIndex:[_tempStr length] - 1];
-//        }
+        _tempStr = [_tempStr substringToIndex:[_tempStr length] - 1];
         
-       NSLog(@" 点击了删除键 ---%@",_tempStr);
+//       NSLog(@" 点击了删除键 ---%@",_tempStr);
     }else{
         
         if (_tempStr.length == 6) {
-            
-            //
-            [self intputFinish];
-            
-            
-        }
         
+            [self intputFinish];
+        }
         
         NSMutableDictionary *userInfoDict = [NSMutableDictionary dictionary];
         userInfoDict[GalenKeyboardNumberKey] = string;
         [[NSNotificationCenter defaultCenter] postNotificationName:GalenKeyboardNumberButtonClick object:nil userInfo:userInfoDict];
+        
     }
     return YES;
 }
@@ -201,7 +192,7 @@
 
 -(void)showSuccess:(NSString *)infoStr
 {
-
+    
     [self.progressView showSuccess:infoStr];
     
 }
@@ -211,15 +202,17 @@
     [UIView animateWithDuration:0.4 animations:^{
         
         self.inPutView.hidden=YES;
-        self.progressView.hidden=NO;
+        self.lessPwdBtn.hidden=YES;
         self.cancelBtn.hidden=YES;
         [self.responsder endEditing:NO];
-        self.lessPwdBtn.hidden=YES;
+        self.progressView.hidden=NO;
+        
+        self.titleLabel.text=@"交易处理中...";
         
     } completion:^(BOOL finished) {
         
         __weak typeof(self) weakSelf=self;
-        
+    
         [self.progressView showProgressView:infoStr stopAnimation:^(BOOL isFinish) {
             
             [weakSelf cancelClickTouchup];
@@ -238,7 +231,6 @@
     /** 弹出键盘 */
     [self showKeyboard];
     
-    
 }
 
 
@@ -255,7 +247,6 @@
     } completion:nil];
     
 }
-
 
 
 /** 键盘退下 */

@@ -10,7 +10,7 @@
 
 static const CFTimeInterval DURATION = 2;
 
-@interface GalneProgressView ()
+@interface GalneProgressView ()<CAAnimationDelegate>
 
 @property (nonatomic, strong) CAGradientLayer *gradientLayer;
 @property (nonatomic, strong) CAShapeLayer *shapeLayer;/**< 圆圈*/
@@ -36,7 +36,7 @@ static const CFTimeInterval DURATION = 2;
 
 - (instancetype)init
 {
-    self                   = [super init];
+    self = [super init];
     if (self) {
         self.frame=CGRectMake(0, 0, 200,200);
         
@@ -68,7 +68,7 @@ static const CFTimeInterval DURATION = 2;
         [self.layer addSublayer:shapeLayer];
         
         textL                  = [CATextLayer layer];
-        textL.string           = @" 加载中...";
+        textL.string           = @"";
         textL.contentsScale    = [UIScreen mainScreen].scale;
         textL.position         = CGPointMake(self.centers.x,self.centers.y+self.radius/2+40);
         
@@ -256,7 +256,8 @@ static const CFTimeInterval DURATION = 2;
 {
     [self startGouAnimation];
     
-    textL.string = infoStr?infoStr:@"支付成功";
+//    textL.string = infoStr?infoStr:@"支付成功";
+    textL.string=@"支付成功";
     
 }
 
@@ -286,7 +287,7 @@ static const CFTimeInterval DURATION = 2;
 
 -(void)backAnimationStop
 {
-self.stopBlock(YES);
+    self.stopBlock(YES);
 }
 
 

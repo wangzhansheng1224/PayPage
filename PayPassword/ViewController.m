@@ -35,9 +35,9 @@
       
         [blockPay showProgressView:@"正在处理..."];
         
-        [blockPay performSelector:@selector(showSuccess:) withObject:self afterDelay:3.0];
+        [blockPay performSelector:@selector(showSuccess:) withObject:nil afterDelay:3.0];
         
-        NSLog(@"密码是%@",pwd);
+//        NSLog(@"密码是%@",pwd);
     }];
     
     //页面销毁回调
