@@ -2,8 +2,8 @@
 //  PayPasswordUITests.m
 //  PayPasswordUITests
 //
-//  Created by apple on 16/7/21.
-//  Copyright © 2016年 apple. All rights reserved.
+//  Created by 王战胜 on 16/11/21.
+//  Copyright © 2016年 王战胜. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
