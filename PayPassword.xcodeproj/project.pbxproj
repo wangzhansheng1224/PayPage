@@ -19,6 +19,8 @@
 		18F5EAA71D40A70000D134FD /* GalenPayPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EAA21D40A70000D134FD /* GalenPayPasswordView.m */; };
 		18F5EAA81D40A70000D134FD /* GalneProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EAA41D40A70000D134FD /* GalneProgressView.m */; };
 		18F5EAA91D40A70000D134FD /* trade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18F5EAA51D40A70000D134FD /* trade.bundle */; };
+		D297073E1DED8D02004FE313 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = D297073C1DED8D02004FE313 /* 1.png */; };
+		D297073F1DED8D02004FE313 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = D297073D1DED8D02004FE313 /* 2.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +64,8 @@
 		18F5EAA31D40A70000D134FD /* GalneProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalneProgressView.h; sourceTree = "<group>"; };
 		18F5EAA41D40A70000D134FD /* GalneProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalneProgressView.m; sourceTree = "<group>"; };
 		18F5EAA51D40A70000D134FD /* trade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = trade.bundle; sourceTree = "<group>"; };
+		D297073C1DED8D02004FE313 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		D297073D1DED8D02004FE313 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +100,8 @@
 				18F5EA841D40A6E700D134FD /* PayPasswordTests */,
 				18F5EA8F1D40A6E700D134FD /* PayPasswordUITests */,
 				18F5EA691D40A6E700D134FD /* Products */,
+				D297073C1DED8D02004FE313 /* 1.png */,
+				D297073D1DED8D02004FE313 /* 2.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,10 +275,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D297073F1DED8D02004FE313 /* 2.png in Resources */,
 				18F5EAA91D40A70000D134FD /* trade.bundle in Resources */,
 				18F5EA7B1D40A6E700D134FD /* LaunchScreen.storyboard in Resources */,
 				18F5EA781D40A6E700D134FD /* Assets.xcassets in Resources */,
 				18F5EA761D40A6E700D134FD /* Main.storyboard in Resources */,
+				D297073E1DED8D02004FE313 /* 1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
