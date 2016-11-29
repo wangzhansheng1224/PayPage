@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "GalenPayPasswordView.h"
 
 @interface ViewController ()
 
@@ -23,5 +24,32 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)clickTouchup:(id)sender {
+    
+    GalenPayPasswordView *payPassword=[GalenPayPasswordView tradeView];
+    [payPassword showInView:self.view.window];
+    
+    __block typeof(GalenPayPasswordView *) blockPay=payPassword;
+    [payPassword setFinish:^(NSString * pwd) {
+      
+        [blockPay showProgressView:@"正在处理..."];
+        
+        [blockPay performSelector:@selector(showSuccess:) withObject:self afterDelay:3.0];
+        
+        
+        
+    }];
+    
+    
+    [payPassword setLessPassword:^{
+    
+        
+        NSLog(@"忘记密码？");
+    }];
+    
+    
+}
+
+
 
 @end

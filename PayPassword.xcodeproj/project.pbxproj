@@ -15,6 +15,10 @@
 		18F5EA7B1D40A6E700D134FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18F5EA791D40A6E700D134FD /* LaunchScreen.storyboard */; };
 		18F5EA861D40A6E700D134FD /* PayPasswordTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EA851D40A6E700D134FD /* PayPasswordTests.m */; };
 		18F5EA911D40A6E700D134FD /* PayPasswordUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EA901D40A6E700D134FD /* PayPasswordUITests.m */; };
+		18F5EAA61D40A70000D134FD /* GalenPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EAA01D40A70000D134FD /* GalenPasswordView.m */; };
+		18F5EAA71D40A70000D134FD /* GalenPayPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EAA21D40A70000D134FD /* GalenPayPasswordView.m */; };
+		18F5EAA81D40A70000D134FD /* GalneProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F5EAA41D40A70000D134FD /* GalneProgressView.m */; };
+		18F5EAA91D40A70000D134FD /* trade.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18F5EAA51D40A70000D134FD /* trade.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,13 @@
 		18F5EA8C1D40A6E700D134FD /* PayPasswordUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PayPasswordUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F5EA901D40A6E700D134FD /* PayPasswordUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayPasswordUITests.m; sourceTree = "<group>"; };
 		18F5EA921D40A6E700D134FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18F5EA9F1D40A70000D134FD /* GalenPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalenPasswordView.h; sourceTree = "<group>"; };
+		18F5EAA01D40A70000D134FD /* GalenPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalenPasswordView.m; sourceTree = "<group>"; };
+		18F5EAA11D40A70000D134FD /* GalenPayPasswordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalenPayPasswordView.h; sourceTree = "<group>"; };
+		18F5EAA21D40A70000D134FD /* GalenPayPasswordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalenPayPasswordView.m; sourceTree = "<group>"; };
+		18F5EAA31D40A70000D134FD /* GalneProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalneProgressView.h; sourceTree = "<group>"; };
+		18F5EAA41D40A70000D134FD /* GalneProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalneProgressView.m; sourceTree = "<group>"; };
+		18F5EAA51D40A70000D134FD /* trade.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = trade.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +112,7 @@
 		18F5EA6A1D40A6E700D134FD /* PayPassword */ = {
 			isa = PBXGroup;
 			children = (
+				18F5EA9E1D40A70000D134FD /* GalenPasswordView */,
 				18F5EA6E1D40A6E700D134FD /* AppDelegate.h */,
 				18F5EA6F1D40A6E700D134FD /* AppDelegate.m */,
 				18F5EA711D40A6E700D134FD /* ViewController.h */,
@@ -138,6 +150,20 @@
 				18F5EA921D40A6E700D134FD /* Info.plist */,
 			);
 			path = PayPasswordUITests;
+			sourceTree = "<group>";
+		};
+		18F5EA9E1D40A70000D134FD /* GalenPasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				18F5EA9F1D40A70000D134FD /* GalenPasswordView.h */,
+				18F5EAA01D40A70000D134FD /* GalenPasswordView.m */,
+				18F5EAA11D40A70000D134FD /* GalenPayPasswordView.h */,
+				18F5EAA21D40A70000D134FD /* GalenPayPasswordView.m */,
+				18F5EAA31D40A70000D134FD /* GalneProgressView.h */,
+				18F5EAA41D40A70000D134FD /* GalneProgressView.m */,
+				18F5EAA51D40A70000D134FD /* trade.bundle */,
+			);
+			path = GalenPasswordView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +269,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18F5EAA91D40A70000D134FD /* trade.bundle in Resources */,
 				18F5EA7B1D40A6E700D134FD /* LaunchScreen.storyboard in Resources */,
 				18F5EA781D40A6E700D134FD /* Assets.xcassets in Resources */,
 				18F5EA761D40A6E700D134FD /* Main.storyboard in Resources */,
@@ -273,6 +300,9 @@
 				18F5EA731D40A6E700D134FD /* ViewController.m in Sources */,
 				18F5EA701D40A6E700D134FD /* AppDelegate.m in Sources */,
 				18F5EA6D1D40A6E700D134FD /* main.m in Sources */,
+				18F5EAA81D40A70000D134FD /* GalneProgressView.m in Sources */,
+				18F5EAA61D40A70000D134FD /* GalenPasswordView.m in Sources */,
+				18F5EAA71D40A70000D134FD /* GalenPayPasswordView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
