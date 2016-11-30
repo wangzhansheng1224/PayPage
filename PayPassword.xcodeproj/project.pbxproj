@@ -100,8 +100,8 @@
 				18F5EA841D40A6E700D134FD /* PayPasswordTests */,
 				18F5EA8F1D40A6E700D134FD /* PayPasswordUITests */,
 				18F5EA691D40A6E700D134FD /* Products */,
-				D29707B71DEE7AF5004FE313 /* 2.png */,
 				D29707B81DEE7AF5004FE313 /* 1.png */,
+				D29707B71DEE7AF5004FE313 /* 2.png */,
 			);
 			sourceTree = "<group>";
 		};
